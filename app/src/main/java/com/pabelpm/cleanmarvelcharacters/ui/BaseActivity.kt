@@ -1,4 +1,4 @@
-package com.pabelpm.cleanmarvelcharacters
+package com.pabelpm.cleanmarvelcharacters.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

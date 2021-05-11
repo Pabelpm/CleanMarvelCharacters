@@ -3,6 +3,7 @@ package com.pabelpm.cleanmarvelcharacters
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import com.pabelpm.cleanmarvelcharacters.ui.main.MainActivity
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
 
 import org.junit.Test

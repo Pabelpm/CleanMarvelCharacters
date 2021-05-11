@@ -10,6 +10,7 @@ With the entity MarvelCharacter
 
 #### Data
 With the repository and data sources, local and remote.
+Repository is tested with mockito
 
 #### UsesCases
 With the cases that the presenter or viewModel need
