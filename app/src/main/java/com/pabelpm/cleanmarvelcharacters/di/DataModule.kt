@@ -1,7 +1,5 @@
 package com.pabelpm.cleanmarvelcharacters.di
 
-
-import com.pabelpm.cleanmarvelcharacters.data.server.RemoteDataSourceImp
 import com.pabelpm.data.repository.MarvelCharactersRepository
 import com.pabelpm.data.source.LocalDataSource
 import com.pabelpm.data.source.RemoteDataSource

@@ -60,7 +60,8 @@ class AppModule {
     fun provideWebService(retrofit: Retrofit): WebService = retrofit.create(WebService::class.java)
 
     @Provides
-    fun remoteDataSourceProvider(webService: WebService): RemoteDataSource = RemoteDataSourceImp(webService)
+    fun remoteDataSourceProvider(webService: WebService): RemoteDataSource =
+        RemoteDataSourceImp(webService)
 
     @Provides
     fun localDataSourceProvider(): LocalDataSource = RoomDataSourceImp()

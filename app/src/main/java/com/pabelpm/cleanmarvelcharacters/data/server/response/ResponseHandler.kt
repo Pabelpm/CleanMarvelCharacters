@@ -14,7 +14,7 @@ open class ResponseHandler {
         return when (e) {
             is HttpException -> Resource.error(getErrorMessage(e.code()), null)
             is SocketTimeoutException -> Resource.error(getErrorMessage(408), null)
-            is JsonSyntaxException -> Resource.error(e.message.toString(),null)
+            is JsonSyntaxException -> Resource.error(e.message.toString(), null)
             else -> Resource.error(getErrorMessage(Int.MAX_VALUE), null)
         }
     }

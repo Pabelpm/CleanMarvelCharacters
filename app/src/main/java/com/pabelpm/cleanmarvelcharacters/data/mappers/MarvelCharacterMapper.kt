@@ -4,6 +4,6 @@ import com.pabelpm.cleanmarvelcharacters.data.server.response.dto.MarvelCharacte
 import com.pabelpm.domain.MarvelCharacter
 
 
-fun MarvelCharacterDto.toMarvelCharacter(): MarvelCharacter{
+fun MarvelCharacterDto.toMarvelCharacter(): MarvelCharacter {
     return MarvelCharacter(id, name, description)
 }
