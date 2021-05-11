@@ -13,3 +13,11 @@ With the repository and data sources, local and remote.
 
 #### UsesCases
 With the cases that the presenter or viewModel need
+
+#### App Module
+App module use MVVM with databinding with liveData. MVVM is similar to MVP changing presenter by viewModel, having the advantage or disadvantage to be more coupled to android.
+
+
+
+## Test
+Run all ( Unit and instrumentation) test  ./gradlew testAll
