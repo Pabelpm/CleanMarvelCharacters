@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -16,10 +17,27 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
+        debug {
+            buildConfigField('String', 'APP_NAME', "\"${project.name}\"")
+            buildConfigField("String", "PUBLIC_KEY", "\"${publicKey}\"")
+            buildConfigField("String", "PRIVATE_KEY", "\"${privateKey}\"")
+            buildConfigField("String", "BASE_URL", "\"${baseUrl}\"")
+        }
+
         release {
+            buildConfigField('String', 'APP_NAME', "\"${project.name}\"")
+            buildConfigField("String", "PUBLIC_KEY", "\"${publicKey}\"")
+            buildConfigField("String", "PRIVATE_KEY", "\"${privateKey}\"")
+            buildConfigField("String", "BASE_URL", "\"${baseUrl}\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -39,7 +57,6 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-
 }
 
 task testAll(dependsOn: ['test', 'connectedAndroidTest']) {
@@ -55,6 +72,7 @@ dependencies {
     implementation androidLibs.values()
     implementation kotlinLibs.values()
     implementation libs.values()
+    kapt androidKaptLibs.values()
 
     testImplementation testLibs.values()
     testImplementation androidxTestLibs.values()

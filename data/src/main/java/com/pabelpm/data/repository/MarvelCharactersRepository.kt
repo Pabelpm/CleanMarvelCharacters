@@ -12,6 +12,5 @@ class MarvelCharactersRepository(
 
     suspend fun getMarvelCharacters(): List<MarvelCharacter> {
         return remoteDataSource.getMarvelCharacters()
-        TODO("Check first localDataSource")
     }
 }
