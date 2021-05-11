@@ -1,12 +1,29 @@
 package com.pabelpm.cleanmarvelcharacters.data.server
 
 import com.pabelpm.cleanmarvelcharacters.data.mappers.toMarvelCharacter
+import com.pabelpm.cleanmarvelcharacters.data.server.response.dto.MarvelCharacterResponseDto
 import com.pabelpm.data.source.RemoteDataSource
 import com.pabelpm.domain.MarvelCharacter
+import retrofit2.Response
 
 class RemoteDataSourceImp(private val webService: WebService) : RemoteDataSource {
     override suspend fun getMarvelCharacters(): List<MarvelCharacter> {
-        return webService.getAllCharacters()
-            .data.marvelCharacterDtos.map { it.toMarvelCharacter() }
+        val response: Response<MarvelCharacterResponseDto>
+        try {
+           response =  webService.getAllCharacters()
+        } catch (t: Throwable) {
+            throw t
+        }
+        if (!response.isSuccessful){
+
+            val responseErrorBody = response.errorBody()
+            if (responseErrorBody != null) {
+                //try to parse to a custom ErrorObject
+                return listOf()
+            }
+            return listOf()
+        }
+        val marvelCharacterResponseDto = response.body() as MarvelCharacterResponseDto
+        return   marvelCharacterResponseDto.data.marvelCharacterDtos.map { it.toMarvelCharacter() }
     }
 }
