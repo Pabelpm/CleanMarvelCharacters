@@ -2,6 +2,8 @@ package com.pabelpm.cleanmarvelcharacters.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.pabelpm.cleanmarvelcharacters.BuildConfig
@@ -24,6 +26,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -94,6 +97,13 @@ class AppModule {
             MarvelCharacterDataBase::class.java,
             "marvelCharacters"
         )
+            //.addMigrations(MIGRATION_1_2)
             .build()
     }
+
+    /*val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE LocalMarvelCharacter " + " ADD COLUMN url TEXT")
+        }
+    }*/
 }
