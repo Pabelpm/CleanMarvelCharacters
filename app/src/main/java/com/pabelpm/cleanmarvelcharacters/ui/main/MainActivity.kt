@@ -15,7 +15,11 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.root_container, MainFragment())
+            .add(R.id.root_container, MainFragment())
             .commitAllowingStateLoss()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) supportFragmentManager.popBackStackImmediate() else super.onBackPressed()
     }
 }
