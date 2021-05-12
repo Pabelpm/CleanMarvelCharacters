@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.pabelpm.cleanmarvelcharacters.R
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.pabelpm.cleanmarvelcharacters.databinding.MainFragmentBinding
 import com.pabelpm.cleanmarvelcharacters.ui.adapters.MarvelCharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class MainFragment: Fragment() {
+class MainFragment : Fragment() {
+    private lateinit var navController: NavController
     private lateinit var adapter: MarvelCharactersAdapter
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
@@ -24,19 +26,32 @@ class MainFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = MainFragmentBinding.inflate(inflater,container, false)
+        binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = view.findNavController()
+
+        viewModel.getMarvelCharacters()
+
+        viewModel.navigateToMarvelCharacterDetails.observe(
+            viewLifecycleOwner,
+            Observer { marvelCharacter ->
+                val action =
+                    MainFragmentDirections.actionMainFragmentToMarvelCharacterDetailsFragment()
+                navController.navigate(action)
+                /*childFragmentManager.beginTransaction()
+                    .add(R.id.navigation_host_fragment,
+                        MarvelCharacterDetailsFragment()
+                    )
+                    .commitAllowingStateLoss()*/
+            })
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-
         adapter = MarvelCharactersAdapter(viewModel::onMarvelCharacterClicked)
         binding.marvelCharactersRecyclerView.adapter = adapter
-
-        viewModel.getMarvelCharacters()
     }
 }

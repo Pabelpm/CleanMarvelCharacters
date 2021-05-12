@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_graph"
-        tools:context=".MainActivity"/>
+        tools:context=".ui.NavigationHostActivity"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
