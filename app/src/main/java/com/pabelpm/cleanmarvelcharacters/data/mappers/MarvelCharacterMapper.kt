@@ -6,15 +6,15 @@ import com.pabelpm.domain.MarvelCharacter
 
 
 fun MarvelCharacterDto.toMarvelCharacter(): MarvelCharacter {
-    return MarvelCharacter(id, name, description, createThumbnailPath(thumbnail.path,thumbnail.extension))
+    return MarvelCharacter(id,createThumbnailPath(thumbnail.path,thumbnail.extension), name, description)
 }
 
 fun MarvelCharacter.toLocalMarvelCharacter(): LocalMarvelCharacter{
-    return  LocalMarvelCharacter(id, name, description,url)
+    return  LocalMarvelCharacter(id,url, name, description)
 }
 
 fun LocalMarvelCharacter.toMarvelCharacter(): MarvelCharacter{
-    return MarvelCharacter(id, name, description,url)
+    return MarvelCharacter(id,url ,name, description)
 }
 
 

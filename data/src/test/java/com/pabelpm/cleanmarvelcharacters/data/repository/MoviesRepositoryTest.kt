@@ -27,7 +27,7 @@ class MarvelRepositoryTest {
 
     lateinit var marvelCharactersRepository: MarvelCharactersRepository
 
-    private val mockMarvelCharacter = MarvelCharacter("0", "Example", "Example description")
+    private val mockMarvelCharacter = MarvelCharacter("0", "https://example.com","Example", "Example description")
 
     @Before
     fun setUp() {
