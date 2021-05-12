@@ -4,7 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.pabelpm.cleanmarvelcharacters.ui.main.MainActivity
-import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions
+import com.schibsted.spain.barista.assertion.BaristaListAssertions
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -29,8 +29,15 @@ class MainActivityInstrumentedTest {
         assertEquals("com.pabelpm.cleanmarvelcharacters", appContext.packageName)
     }
 
+
+
     @Test
-    fun showHelloWorld() {
-        BaristaVisibilityAssertions.assertDisplayed(R.id.helloWorld, "Hello World!")
+    fun checkIfFirstTitleIsShowing() {
+        BaristaListAssertions.assertDisplayedAtPosition(
+            R.id.marvelCharactersRecyclerView,
+            0,
+            "3-D Man"
+        )
+        BaristaListAssertions.assertListItemCount(R.id.marvelCharactersRecyclerView, 20)
     }
 }

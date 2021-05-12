@@ -19,4 +19,8 @@ class MainViewModel @ViewModelInject constructor(private val getMarvelCharacters
             _marvelCharactersLiveData.value =  getMarvelCharacters.invoke()
         }
     }
+
+    fun onMarvelCharacterClicked(marvelCharacter: MarvelCharacter) {
+
+    }
 }

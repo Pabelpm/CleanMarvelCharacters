@@ -18,7 +18,7 @@ With the cases that the presenter or viewModel need
 
 #### App Module
 App module use MVVM with databinding with liveData. MVVM is similar to MVP changing presenter by viewModel, having the advantage or disadvantage to be more coupled to android.
-
+Real DataBinding when inflate layout, for load adapter and showing detail of marvelCharacter
 
 
 ## Test

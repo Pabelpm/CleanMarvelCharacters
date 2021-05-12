@@ -52,6 +52,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     testOptions {
@@ -77,4 +78,8 @@ dependencies {
     testImplementation testLibs.values()
     testImplementation androidxTestLibs.values()
     androidTestImplementation androidTestLibs.values()
+
+    androidTestImplementation('com.schibsted.spain:barista:3.9.0') {
+        exclude group: 'org.jetbrains.kotlin' // Only if you already use Kotlin in your project
+    }
 }
