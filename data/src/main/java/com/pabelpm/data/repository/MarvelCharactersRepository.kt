@@ -4,6 +4,7 @@ package com.pabelpm.data.repository
 import com.pabelpm.data.source.LocalDataSource
 import com.pabelpm.data.source.RemoteDataSource
 import com.pabelpm.domain.MarvelCharacter
+import java.util.logging.Logger
 
 class MarvelCharactersRepository(
     private val localDataSource: LocalDataSource,
@@ -11,6 +12,10 @@ class MarvelCharactersRepository(
 ) {
 
     suspend fun getMarvelCharacters(): List<MarvelCharacter> {
-        return remoteDataSource.getMarvelCharacters()
+        if(localDataSource.isEmpty()){
+            val marvelCharacters = remoteDataSource.getMarvelCharacters()
+            localDataSource.saveMarvelCharacters(marvelCharacters)
+        }
+        return localDataSource.getMarvelCharacters()
     }
 }

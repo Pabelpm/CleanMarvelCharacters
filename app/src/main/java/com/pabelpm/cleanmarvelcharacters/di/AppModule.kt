@@ -1,8 +1,12 @@
 package com.pabelpm.cleanmarvelcharacters.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.pabelpm.cleanmarvelcharacters.BuildConfig
+import com.pabelpm.cleanmarvelcharacters.data.local.MarvelCharacterDao
+import com.pabelpm.cleanmarvelcharacters.data.local.MarvelCharacterDataBase
 import com.pabelpm.cleanmarvelcharacters.data.local.RoomDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.RemoteDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.WebService
@@ -13,6 +17,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -76,5 +81,19 @@ class AppModule {
         RemoteDataSourceImp(webService)
 
     @Provides
-    fun localDataSourceProvider(): LocalDataSource = RoomDataSourceImp()
+    fun localDataSourceProvider(marvelCharacterDao: MarvelCharacterDao): LocalDataSource = RoomDataSourceImp(marvelCharacterDao)
+
+    @Provides
+    fun marvelCharacterDaoProvides(marvelCharacterDataBase: MarvelCharacterDataBase): MarvelCharacterDao = marvelCharacterDataBase.marvelCharacterDao()
+
+    @Singleton
+    @Provides
+    fun provideRoomInstance(@ApplicationContext context: Context): MarvelCharacterDataBase {
+        return Room.databaseBuilder(
+            context,
+            MarvelCharacterDataBase::class.java,
+            "marvelCharacters"
+        )
+            .build()
+    }
 }

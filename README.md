@@ -11,6 +11,7 @@ With the entity MarvelCharacter
 #### Data
 With the repository and data sources, local and remote.
 Repository is tested with mockito
+Repository call first to localDataSource and then if is empty call to the server and save the response.
 
 #### UsesCases
 With the cases that the presenter or viewModel need

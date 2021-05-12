@@ -1,6 +1,7 @@
 package com.pabelpm.cleanmarvelcharacters.data.repository
 
-
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import com.pabelpm.data.repository.MarvelCharactersRepository
 import com.pabelpm.data.source.LocalDataSource
 import com.pabelpm.data.source.RemoteDataSource
@@ -15,7 +16,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MoviesRepositoryTest {
+class MarvelRepositoryTest {
 
 
     @Mock
@@ -35,14 +36,30 @@ class MoviesRepositoryTest {
     }
 
     @Test
-    fun `getPopularMovies gets from remote`() {
+    fun save_remote_data_to_local() {
         runBlocking {
-            val remoteMovies = listOf(mockMarvelCharacter)
-            `when`(remoteDataSource.getMarvelCharacters()).thenReturn(remoteMovies)
+
+            val remoteMarvelCharacters = listOf(mockMarvelCharacter)
+            whenever(localDataSource.isEmpty()).thenReturn(true)
+            whenever(remoteDataSource.getMarvelCharacters()).thenReturn(remoteMarvelCharacters)
+
+            marvelCharactersRepository.getMarvelCharacters()
+
+            verify(localDataSource).saveMarvelCharacters(remoteMarvelCharacters)
+        }
+    }
+
+    @Test
+    fun get_marvel_characters_from_local() {
+        runBlocking {
+            val localMarvelCharacters = listOf(mockMarvelCharacter)
+
+            `when`(localDataSource.isEmpty()).thenReturn(false)
+            `when`(localDataSource.getMarvelCharacters()).thenReturn(localMarvelCharacters)
 
             val result = marvelCharactersRepository.getMarvelCharacters()
 
-            assertEquals(remoteMovies, result)
+            assertEquals(localMarvelCharacters, result)
         }
     }
 }
