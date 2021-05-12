@@ -42,16 +42,13 @@ class MainFragment : Fragment() {
                 val action =
                     MainFragmentDirections.actionMainFragmentToMarvelCharacterDetailsFragment()
                 navController.navigate(action)
-                /*childFragmentManager.beginTransaction()
-                    .add(R.id.navigation_host_fragment,
-                        MarvelCharacterDetailsFragment()
-                    )
-                    .commitAllowingStateLoss()*/
             })
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         adapter = MarvelCharactersAdapter(viewModel::onMarvelCharacterClicked)
         binding.marvelCharactersRecyclerView.adapter = adapter
+
+        viewModel.getMarvelCharacters()
     }
 }
