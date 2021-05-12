@@ -22,3 +22,5 @@ App module use MVVM with databinding with liveData. MVVM is similar to MVP chang
 
 ## Test
 Run all ( Unit and instrumentation) test  ./gradlew testAll
+
+## Manage Errors with retrofit

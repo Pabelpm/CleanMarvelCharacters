@@ -6,6 +6,7 @@ import com.pabelpm.cleanmarvelcharacters.BuildConfig
 import com.pabelpm.cleanmarvelcharacters.data.local.RoomDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.RemoteDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.WebService
+import com.pabelpm.cleanmarvelcharacters.data.server.http.AuthInterceptor
 import com.pabelpm.data.source.LocalDataSource
 import com.pabelpm.data.source.RemoteDataSource
 import dagger.Module
@@ -30,6 +31,7 @@ class AppModule {
         logger.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
+            .addInterceptor(provideAuthInterceptor())
             .addInterceptor(logger)
             .cache(null)
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -37,9 +39,19 @@ class AppModule {
             .writeTimeout(60, TimeUnit.SECONDS).build()
     }
 
+
+    @Provides
+    fun providePublicKey() = BuildConfig.PUBLIC_KEY
+
+    @Provides
+    fun providePrivateKey() = BuildConfig.PRIVATE_KEY
+
     @Provides
     fun provideBaseUrl() = BuildConfig.BASE_URL
 
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor() = AuthInterceptor(providePublicKey(), providePrivateKey())
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
