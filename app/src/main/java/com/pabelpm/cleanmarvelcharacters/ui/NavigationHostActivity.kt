@@ -13,11 +13,5 @@ class NavigationHostActivity : BaseActivity() {
     override fun initializeView() {
         binding = NavigationHostActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navigation_host_fragment,
-                MainFragment()
-            )
-            .commitAllowingStateLoss()
     }
 }

@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.pabelpm.cleanmarvelcharacters.databinding.MarvelCharacterDetailsFragmentBinding
-import com.pabelpm.cleanmarvelcharacters.ui.adapters.MarvelCharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MarvelCharacterDetailsFragment : Fragment() {
 
-    private val viewModel: MarvelCharactersDetailsViewModel by viewModels()
+    private val viewModel: MarvelCharacterDetailsViewModel by viewModels()
     private lateinit var binding: MarvelCharacterDetailsFragmentBinding
 
     override fun onCreateView(

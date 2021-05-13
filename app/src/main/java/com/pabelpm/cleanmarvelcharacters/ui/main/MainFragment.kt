@@ -13,7 +13,6 @@ import com.pabelpm.cleanmarvelcharacters.databinding.MainFragmentBinding
 import com.pabelpm.cleanmarvelcharacters.ui.adapters.MarvelCharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var navController: NavController
