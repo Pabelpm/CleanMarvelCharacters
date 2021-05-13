@@ -12,18 +12,30 @@ class MarvelCharactersRepository(
 ) {
 
     suspend fun getMarvelCharacters(): List<MarvelCharacter> {
-        if(localDataSource.isEmpty()){
-            val marvelCharacters = remoteDataSource.getMarvelCharacters()
+        //if(localDataSource.isEmpty()){
+            val offset = getOffset()
+            val marvelCharacters = remoteDataSource.getMarvelCharacters(offset)
             localDataSource.saveMarvelCharacters(marvelCharacters)
-        }
+            localDataSource.saveOffset(offset+100)
+        //}
         return localDataSource.getMarvelCharacters()
     }
 
     suspend fun getMarvelCharacter(id:String): MarvelCharacter {
-        if(localDataSource.isEmpty()){
+        return try{
+            localDataSource.getById(id)
+        }catch (e:Exception){
             val marvelCharacter = remoteDataSource.getMarvelCharacter(id)
             localDataSource.saveMarvelCharacter(marvelCharacter)
+            marvelCharacter
         }
-        return localDataSource.getById(id)
+    }
+
+    private suspend fun getOffset():Int{
+        var offset = 0
+        try {
+            offset = localDataSource.getOffset()
+        }catch (e:Exception){ print("Offset not setted, and return 0")}
+        return offset
     }
 }

@@ -15,10 +15,18 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 class MainActivityModule {
 
     @Provides
-    fun mainViewModelProvider(getMarvelCharacters: GetMarvelCharacters) =
-        MainViewModel(getMarvelCharacters)
+    fun mainViewModelProvider(getMarvelCharacters: GetMarvelCharacters, getMarvelCharacter: GetMarvelCharacter) =
+        MainViewModel(getMarvelCharacters,getMarvelCharacter)
 
     @Provides
     fun getMarvelCharactersProvider(marvelCharactersRepository: MarvelCharactersRepository) =
         GetMarvelCharacters(marvelCharactersRepository)
+
+    @Provides
+    fun marvelCharacterDetailsViewModelProvider(getMarvelCharacter: GetMarvelCharacter) =
+        MarvelCharacterDetailsViewModel(getMarvelCharacter)
+
+    @Provides
+    fun getMarvelCharacterProvider(marvelCharactersRepository: MarvelCharactersRepository) =
+        GetMarvelCharacter(marvelCharactersRepository)
 }

@@ -34,6 +34,7 @@ class AuthInterceptor @Inject constructor(
             .addQueryParameter("ts", "1")
             .addQueryParameter("apikey", publicKey)
             .addQueryParameter("hash", "c12f8513d6e05549223ddd6e0bf5806e")
+            .addQueryParameter("limit","100")
             .build()
 
         val requestBuilder = originalRequest.newBuilder().url(url)

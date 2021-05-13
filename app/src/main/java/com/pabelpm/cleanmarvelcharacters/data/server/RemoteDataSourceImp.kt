@@ -7,10 +7,10 @@ import com.pabelpm.domain.MarvelCharacter
 import retrofit2.Response
 
 class RemoteDataSourceImp(private val webService: WebService) : RemoteDataSource {
-    override suspend fun getMarvelCharacters(): List<MarvelCharacter> {
+    override suspend fun getMarvelCharacters(offset:Int): List<MarvelCharacter> {
         val response: Response<MarvelCharacterResponseDto>
         try {
-           response =  webService.getAllCharacters()
+           response =  webService.getAllCharacters(offset)
         } catch (t: Throwable) {
             throw t
         }

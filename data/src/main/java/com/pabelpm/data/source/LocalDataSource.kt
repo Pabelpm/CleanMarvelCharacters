@@ -6,6 +6,8 @@ interface LocalDataSource {
     suspend fun isEmpty():Boolean
     suspend fun saveMarvelCharacter(marvelCharacter: MarvelCharacter)
     suspend fun saveMarvelCharacters(marvelCharacters: List<MarvelCharacter>)
+    suspend fun saveOffset(offset:Int)
+    suspend fun getOffset():Int
     suspend fun getMarvelCharacters(): List<MarvelCharacter>
     suspend fun getById(id: String): MarvelCharacter
 }

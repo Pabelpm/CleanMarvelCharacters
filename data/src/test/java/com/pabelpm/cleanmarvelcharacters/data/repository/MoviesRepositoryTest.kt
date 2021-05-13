@@ -42,9 +42,9 @@ class MarvelRepositoryTest {
 
             val remoteMarvelCharacters = listOf(mockMarvelCharacter)
             whenever(localDataSource.isEmpty()).thenReturn(true)
-            whenever(remoteDataSource.getMarvelCharacters()).thenReturn(remoteMarvelCharacters)
+            whenever(remoteDataSource.getMarvelCharacters(0)).thenReturn(remoteMarvelCharacters)
 
-            marvelCharactersRepository.getMarvelCharacters()
+            marvelCharactersRepository.getMarvelCharacters(0)
 
             verify(localDataSource).saveMarvelCharacters(remoteMarvelCharacters)
         }
@@ -58,7 +58,7 @@ class MarvelRepositoryTest {
             `when`(localDataSource.isEmpty()).thenReturn(false)
             `when`(localDataSource.getMarvelCharacters()).thenReturn(localMarvelCharacters)
 
-            val result = marvelCharactersRepository.getMarvelCharacters()
+            val result = marvelCharactersRepository.getMarvelCharacters(0)
 
             assertEquals(localMarvelCharacters, result)
         }

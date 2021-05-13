@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder
 import com.pabelpm.cleanmarvelcharacters.BuildConfig
 import com.pabelpm.cleanmarvelcharacters.data.local.MarvelCharacterDao
 import com.pabelpm.cleanmarvelcharacters.data.local.MarvelCharacterDataBase
+import com.pabelpm.cleanmarvelcharacters.data.local.PaginationOffsetDao
 import com.pabelpm.cleanmarvelcharacters.data.local.RoomDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.RemoteDataSourceImp
 import com.pabelpm.cleanmarvelcharacters.data.server.WebService
@@ -84,10 +85,13 @@ class AppModule {
         RemoteDataSourceImp(webService)
 
     @Provides
-    fun localDataSourceProvider(marvelCharacterDao: MarvelCharacterDao): LocalDataSource = RoomDataSourceImp(marvelCharacterDao)
+    fun localDataSourceProvider(marvelCharacterDao: MarvelCharacterDao, paginationOffsetDao: PaginationOffsetDao): LocalDataSource = RoomDataSourceImp(marvelCharacterDao,paginationOffsetDao)
 
     @Provides
     fun marvelCharacterDaoProvides(marvelCharacterDataBase: MarvelCharacterDataBase): MarvelCharacterDao = marvelCharacterDataBase.marvelCharacterDao()
+
+    @Provides
+    fun paginationOffsetDaoProvides(marvelCharacterDataBase: MarvelCharacterDataBase): PaginationOffsetDao = marvelCharacterDataBase.paginationOffsetDao()
 
     @Singleton
     @Provides

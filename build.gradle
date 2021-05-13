@@ -42,6 +42,8 @@ allprojects {
                 roomRuntime         : 'androidx.room:room-runtime:2.2.6',
                 navigationFragment  : 'androidx.navigation:navigation-fragment-ktx:2.3.3',
                 navigationUI        : 'androidx.navigation:navigation-ui-ktx:2.3.3',
+                paging              : "androidx.paging:paging-runtime:3.0.0-alpha03",
+
         ]
 
         androidKaptLibs = [
