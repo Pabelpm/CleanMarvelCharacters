@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
 
         viewModel.navigateToMarvelCharacterDetails.observe(viewLifecycleOwner, Observer {
                 marvelCharacter ->
-                val action = MainFragmentDirections.actionMainFragmentToMarvelCharacterDetailsFragment()
+                val action = MainFragmentDirections.actionMainFragmentToMarvelCharacterDetailsFragment(marvelCharacter.id)
                 navController.navigate(action)
             })
 
@@ -46,7 +46,5 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this@MainFragment
         adapter = MarvelCharactersAdapter(viewModel::onMarvelCharacterClicked)
         binding.marvelCharactersRecyclerView.adapter = adapter
-
-        viewModel.getMarvelCharacters()
     }
 }

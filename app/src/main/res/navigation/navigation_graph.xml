@@ -13,5 +13,12 @@
     <fragment
         android:id="@+id/marvelCharacterDetailsFragment"
         android:name="com.pabelpm.cleanmarvelcharacters.ui.marvelcharacterdetails.MarvelCharacterDetailsFragment"
-        android:label="MarvelCharacterDetailsFragment" />
+        android:label="MarvelCharacterDetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_marvelCharacterDetailsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
