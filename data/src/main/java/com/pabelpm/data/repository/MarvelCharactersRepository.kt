@@ -18,4 +18,12 @@ class MarvelCharactersRepository(
         }
         return localDataSource.getMarvelCharacters()
     }
+
+    suspend fun getMarvelCharacter(id:String): MarvelCharacter {
+        if(localDataSource.isEmpty()){
+            val marvelCharacter = remoteDataSource.getMarvelCharacter(id)
+            localDataSource.saveMarvelCharacter(marvelCharacter)
+        }
+        return localDataSource.getById(id)
+    }
 }

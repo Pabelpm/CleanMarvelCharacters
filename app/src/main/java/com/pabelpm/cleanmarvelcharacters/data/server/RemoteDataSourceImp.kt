@@ -26,4 +26,16 @@ class RemoteDataSourceImp(private val webService: WebService) : RemoteDataSource
         val marvelCharacterResponseDto = response.body() as MarvelCharacterResponseDto
         return   marvelCharacterResponseDto.data.marvelCharacterDtos.map { it.toMarvelCharacter() }
     }
+
+    override suspend fun getMarvelCharacter(id: String): MarvelCharacter {
+        val response: Response<MarvelCharacterResponseDto>
+        try {
+            response =  webService.getCharacterByIdentifier(id)
+        } catch (t: Throwable) {
+            throw t
+        }
+
+        val marvelCharacterResponseDto = response.body() as MarvelCharacterResponseDto
+        return   marvelCharacterResponseDto.data.marvelCharacterDtos.first().toMarvelCharacter()
+    }
 }

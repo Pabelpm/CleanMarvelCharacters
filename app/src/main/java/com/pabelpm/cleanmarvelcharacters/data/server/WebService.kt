@@ -12,6 +12,6 @@ interface WebService {
 
     //The same response, response is a list
     @GET("v1/public/characters/{characterId}")
-    suspend fun getCharacterByIdentifier(@Path(value = "characterId") characterId: String): MarvelCharacterResponseDto
+    suspend fun getCharacterByIdentifier(@Path(value = "characterId") characterId: String): Response<MarvelCharacterResponseDto>
 
 }
