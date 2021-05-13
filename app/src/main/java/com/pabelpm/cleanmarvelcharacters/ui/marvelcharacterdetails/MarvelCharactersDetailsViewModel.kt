@@ -1,4 +1,4 @@
-package com.pabelpm.cleanmarvelcharacters.ui.marvelCharacterDetails
+package com.pabelpm.cleanmarvelcharacters.ui.marvelcharacterdetails
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -9,7 +9,6 @@ import com.pabelpm.domain.MarvelCharacter
 import com.pabelpm.usescases.GetMarvelCharacters
 import kotlinx.coroutines.launch
 
-class MarvelCharacterDetailsViewModel @ViewModelInject constructor() : ViewModel() {
-
+class MarvelCharactersDetailsViewModel @ViewModelInject constructor(private val getMarvelCharacters: GetMarvelCharacters) : ViewModel() {
 
 }
