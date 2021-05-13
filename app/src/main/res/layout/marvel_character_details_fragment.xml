@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.pabelpm.cleanmarvelcharacters.ui.marvelcharacterdetails.MarvelCharacterDetailsViewModel" />
@@ -14,11 +16,41 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@id/marvelCharacterName"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewmodel.marvelCharacterLiveData.name}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tool:text="Name" />
+
+        <ImageView
+            android:id="@+id/marvelCharacterImageView"
+            tool:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/marvelCharacterName"
+            app:url="@{viewmodel.marvelCharacterLiveData.url}" />
+
+        <TextView
+            android:id="@+id/marvelCharacterDescription"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.marvelCharacterLiveData.name}"/>
+            android:layout_margin="8dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewmodel.marvelCharacterLiveData.description}"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/marvelCharacterImageView"
+            tool:text="Example description, Example description, Example description, Example description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

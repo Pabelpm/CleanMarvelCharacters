@@ -1,5 +1,6 @@
 package com.pabelpm.cleanmarvelcharacters.data.repository
 
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.pabelpm.data.repository.MarvelCharactersRepository
@@ -60,6 +61,35 @@ class MarvelRepositoryTest {
             val result = marvelCharactersRepository.getMarvelCharacters()
 
             assertEquals(localMarvelCharacters, result)
+        }
+    }
+
+    @Test
+    fun save_remote_marvel_character_to_local() {
+        runBlocking {
+
+            val remoteMarvelCharacter = mockMarvelCharacter
+            whenever(localDataSource.isEmpty()).thenReturn(true)
+            whenever(remoteDataSource.getMarvelCharacter("001")).thenReturn(remoteMarvelCharacter)
+
+            marvelCharactersRepository.getMarvelCharacter("001")
+
+            verify(localDataSource).saveMarvelCharacter(remoteMarvelCharacter)
+        }
+    }
+
+
+    @Test
+    fun get_marvel_character_from_local() {
+        runBlocking {
+            val localMarvelCharacter = mockMarvelCharacter
+
+            `when`(localDataSource.isEmpty()).thenReturn(false)
+            `when`(localDataSource.getById("001")).thenReturn(localMarvelCharacter)
+
+            val result = marvelCharactersRepository.getMarvelCharacter("001")
+
+            assertEquals(localMarvelCharacter, result)
         }
     }
 }
