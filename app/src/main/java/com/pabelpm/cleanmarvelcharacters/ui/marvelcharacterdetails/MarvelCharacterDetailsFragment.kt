@@ -27,6 +27,6 @@ class MarvelCharacterDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this@MarvelCharacterDetailsFragment
     }
 }
