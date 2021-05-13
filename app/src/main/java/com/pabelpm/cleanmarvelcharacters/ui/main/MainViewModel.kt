@@ -14,8 +14,8 @@ class MainViewModel @ViewModelInject constructor(private val getMarvelCharacters
     private val _marvelCharactersLiveData = MutableLiveData<List<MarvelCharacter>>()
     val marvelCharactersLiveData: LiveData<List<MarvelCharacter>> get() = _marvelCharactersLiveData
 
-    private val _navigateToMarvelCharacterDetail = MutableLiveData<MarvelCharacter>()
-    val navigateToMarvelCharacterDetail: LiveData<MarvelCharacter> get() = _navigateToMarvelCharacterDetail
+    private val _navigateToMarvelCharacterDetails = MutableLiveData<MarvelCharacter>()
+    val navigateToMarvelCharacterDetails: LiveData<MarvelCharacter> get() = _navigateToMarvelCharacterDetails
 
     fun getMarvelCharacters() {
         viewModelScope.launch {
@@ -24,6 +24,6 @@ class MainViewModel @ViewModelInject constructor(private val getMarvelCharacters
     }
 
     fun onMarvelCharacterClicked(marvelCharacter: MarvelCharacter) {
-        _navigateToMarvelCharacterDetail.value = marvelCharacter
+        _navigateToMarvelCharacterDetails.value = marvelCharacter
     }
 }

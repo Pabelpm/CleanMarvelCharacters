@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.pabelpm.cleanmarvelcharacters.R
 import com.pabelpm.cleanmarvelcharacters.databinding.MainFragmentBinding
 import com.pabelpm.cleanmarvelcharacters.ui.adapters.MarvelCharactersAdapter
-import com.pabelpm.cleanmarvelcharacters.ui.marvelCharacterDetails.MarvelCharacterDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+    private lateinit var navController: NavController
     private lateinit var adapter: MarvelCharactersAdapter
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
@@ -30,21 +33,21 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = view.findNavController()
+
+        viewModel.getMarvelCharacters()
+
+        viewModel.navigateToMarvelCharacterDetails.observe(viewLifecycleOwner, Observer {
+                marvelCharacter ->
+                val action = MainFragmentDirections.actionMainFragmentToMarvelCharacterDetailsFragment()
+                navController.navigate(action)
+            })
 
         binding.viewmodel = viewModel
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this@MainFragment
         adapter = MarvelCharactersAdapter(viewModel::onMarvelCharacterClicked)
         binding.marvelCharactersRecyclerView.adapter = adapter
 
         viewModel.getMarvelCharacters()
-
-        viewModel.navigateToMarvelCharacterDetail.observe(
-            viewLifecycleOwner,
-            Observer { marvelCharacter ->
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.add(R.id.root_container, MarvelCharacterDetailsFragment())
-                    ?.addToBackStack("MarvelCharacterDetailsFragment")?.commit()
-            })
     }
 }
