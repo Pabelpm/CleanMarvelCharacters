@@ -28,9 +28,10 @@ class MarvelCharacterDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        print("Id recibido ${args.id}")
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this@MarvelCharacterDetailsFragment
+
+        viewModel.getMarvelCharacter(args.id)
     }
 }
