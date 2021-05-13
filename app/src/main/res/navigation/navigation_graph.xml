@@ -12,6 +12,6 @@
     </fragment>
     <fragment
         android:id="@+id/marvelCharacterDetailsFragment"
-        android:name="com.pabelpm.cleanmarvelcharacters.ui.marvelCharacterDetails.MarvelCharacterDetailsFragment"
+        android:name="com.pabelpm.cleanmarvelcharacters.ui.marvelcharacterdetails.MarvelCharacterDetailsFragment"
         android:label="MarvelCharacterDetailsFragment" />
 </navigation>
