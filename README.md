@@ -32,3 +32,4 @@ Run all ( Unit and instrumentation) test  ./gradlew testAll
 
 
 ## Devices tested SAMSUNG SM -J510FN and NEXUS 5X
+Testes version in TAG v0.0.1
