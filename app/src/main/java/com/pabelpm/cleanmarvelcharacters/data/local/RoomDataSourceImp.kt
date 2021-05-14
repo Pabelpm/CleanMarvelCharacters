@@ -12,8 +12,15 @@ import javax.inject.Inject
 
 class RoomDataSourceImp @Inject constructor(private val marvelCharacterDao: MarvelCharacterDao, private val paginationOffsetDao: PaginationOffsetDao) : LocalDataSource {
 
-    override suspend fun isEmpty(): Boolean {
-       return withContext(Dispatchers.IO) { marvelCharacterDao.getAll().isEmpty() }
+    override suspend fun marvelCharacterExist(id:String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                marvelCharacterDao.findById(id).toMarvelCharacter()
+                return@withContext true
+            }catch (e:Exception){
+                return@withContext false
+            }
+        }
     }
 
     override suspend fun saveMarvelCharacters(marvelCharacters: List<MarvelCharacter>) {

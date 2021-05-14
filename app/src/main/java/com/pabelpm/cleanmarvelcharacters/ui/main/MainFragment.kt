@@ -77,6 +77,7 @@ class MainFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
                     viewModel.getMarvelCharacters()
+                    //TO DO block ui loading until response and load adapter and not recall sometimes
                 }
             }
         })
